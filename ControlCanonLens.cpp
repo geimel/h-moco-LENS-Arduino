@@ -178,7 +178,7 @@ uint8_t ControlLoopLENS::doByte(uint8_t byteToSend) {
     clkLow(); //drop the clock, the lens sets our DCI after this edge.
     // dbgLow();
 
-    for (int j = 0; j < BIT_LEN; j++); //bit delay on low clock
+    for (int j = 0; j < BIT_LEN; j++) //bit delay on low clock
     __asm__("nop\n\t");
 
     clkHigh(); //raise the clock. The lens reads our DCO after this edge.
@@ -186,7 +186,7 @@ uint8_t ControlLoopLENS::doByte(uint8_t byteToSend) {
     byteIn = (byteIn << 1) | ((dciVal >> DCI_BIT) & 0x01); //store the DCI bit in byteIn and shift
     // dbgHigh();
 
-    for (int j = 0; j < BIT_LEN; j++); //bit delay on high clock
+    for (int j = 0; j < BIT_LEN; j++) //bit delay on high clock
     __asm__("nop\n\t");
 
   }
@@ -201,7 +201,7 @@ uint8_t ControlLoopLENS::doByte(uint8_t byteToSend) {
 
   //Delay a bit to give the lens time to pull the clock low to signify it is busy
   // (we don't assume it always does, although it does appear to)
-  for (int j = 0; j < BIT_LEN; j++);
+  for (int j = 0; j < BIT_LEN; j++)
   __asm__("nop\n\t");
   //  dbgHigh(); //dbg signature for 'busy received'
   //
@@ -217,7 +217,7 @@ uint8_t ControlLoopLENS::doByte(uint8_t byteToSend) {
   //  dbgLow();
 
   // wait a little bit longer before proceeding with the next byte
-  for (int j = 0; j < POST_BUSY_WAIT; j++);
+  for (int j = 0; j < POST_BUSY_WAIT; j++)
   __asm__("nop\n\t");
 
   //  dbgHigh();
